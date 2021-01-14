@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <style>
+        #map {
+            width: 1053px;
+            height: 535px;
+        }
+        </style>
+        <title>Variation de la Dotation Globale de Fonctionnement, entre 2019 et 2020</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/VariationdelaDGFdanslesEPCI_0.js"></script>
+        <script src="data/VariationdelaDGFdanslesdpartements_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:22, minZoom:1
+        }).fitBounds([[41.5089198497,-6.68453878982],[49.757433468,18.7311981173]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_VariationdelaDGFdanslesEPCI_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom</th>\
+                        <td>' + (feature.properties['Nom'] !== null ? Autolinker.link(String(feature.properties['Nom'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Evolution </th>\
+                        <td>' + (feature.properties['Evolution '] !== null ? Autolinker.link(String(feature.properties['Evolution '])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Montant DG</th>\
+                        <td>' + (feature.properties['Montant DG'] !== null ? Autolinker.link(String(feature.properties['Montant DG'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Montant DG_1</th>\
+                        <td>' + (feature.properties['Montant DG_1'] !== null ? Autolinker.link(String(feature.properties['Montant DG_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Part de la</th>\
+                        <td>' + (feature.properties['Part de la'] !== null ? Autolinker.link(String(feature.properties['Part de la'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Variation </th>\
+                        <td>' + (feature.properties['Variation '] !== null ? Autolinker.link(String(feature.properties['Variation '])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Part de la_1</th>\
+                        <td>' + (feature.properties['Part de la_1'] !== null ? Autolinker.link(String(feature.properties['Part de la_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EvoDGF</th>\
+                        <td>' + (feature.properties['EvoDGF'] !== null ? Autolinker.link(String(feature.properties['EvoDGF'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VariationdelaDGFdanslesEPCI_0_0(feature) {
+            if (feature.properties['EvoDGF'] >= -50.000000 && feature.properties['EvoDGF'] <= -2.000000 ) {
+                return {
+                pane: 'pane_VariationdelaDGFdanslesEPCI_0',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,209,166,1.0)',
+            }
+            }
+            if (feature.properties['EvoDGF'] >= -2.000000 && feature.properties['EvoDGF'] <= 2.000000 ) {
+                return {
+                pane: 'pane_VariationdelaDGFdanslesEPCI_0',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,163,76,1.0)',
+            }
+            }
+            if (feature.properties['EvoDGF'] >= 2.000000 && feature.properties['EvoDGF'] <= 800.000000 ) {
+                return {
+                pane: 'pane_VariationdelaDGFdanslesEPCI_0',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,123,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_VariationdelaDGFdanslesEPCI_0');
+        map.getPane('pane_VariationdelaDGFdanslesEPCI_0').style.zIndex = 400;
+        map.getPane('pane_VariationdelaDGFdanslesEPCI_0').style['mix-blend-mode'] = 'normal';
+        var layer_VariationdelaDGFdanslesEPCI_0 = new L.geoJson(json_VariationdelaDGFdanslesEPCI_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_VariationdelaDGFdanslesEPCI_0',
+            onEachFeature: pop_VariationdelaDGFdanslesEPCI_0,
+            style: style_VariationdelaDGFdanslesEPCI_0_0,
+        });
+        bounds_group.addLayer(layer_VariationdelaDGFdanslesEPCI_0);
+        map.addLayer(layer_VariationdelaDGFdanslesEPCI_0);
+        function pop_VariationdelaDGFdanslesdpartements_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nom</th>\
+                        <td>' + (feature.properties['Nom'] !== null ? Autolinker.link(String(feature.properties['Nom'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Evo DGF</th>\
+                        <td>' + (feature.properties['Evo DGF'] !== null ? Autolinker.link(String(feature.properties['Evo DGF'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DGF</th>\
+                        <td>' + (feature.properties['DGF'] !== null ? Autolinker.link(String(feature.properties['DGF'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DGF/hab</th>\
+                        <td>' + (feature.properties['DGF/hab'] !== null ? Autolinker.link(String(feature.properties['DGF/hab'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Part DGF/R</th>\
+                        <td>' + (feature.properties['Part DGF/R'] !== null ? Autolinker.link(String(feature.properties['Part DGF/R'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Evo DGF/RF</th>\
+                        <td>' + (feature.properties['Evo DGF/RF'] !== null ? Autolinker.link(String(feature.properties['Evo DGF/RF'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Ppéréquati</th>\
+                        <td>' + (feature.properties['Ppéréquati'] !== null ? Autolinker.link(String(feature.properties['Ppéréquati'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VariationdelaDGFdanslesdpartements_1_0(feature) {
+            if (feature.properties['q2wHide_vDGF'] >= -39.870000 && feature.properties['q2wHide_vDGF'] <= -0.500000 ) {
+                return {
+                pane: 'pane_VariationdelaDGFdanslesdpartements_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,209,166,1.0)',
+            }
+            }
+            if (feature.properties['q2wHide_vDGF'] >= -0.500000 && feature.properties['q2wHide_vDGF'] <= 0.500000 ) {
+                return {
+                pane: 'pane_VariationdelaDGFdanslesdpartements_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,163,76,1.0)',
+            }
+            }
+            if (feature.properties['q2wHide_vDGF'] >= 0.500000 && feature.properties['q2wHide_vDGF'] <= 100.000000 ) {
+                return {
+                pane: 'pane_VariationdelaDGFdanslesdpartements_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,123,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_VariationdelaDGFdanslesdpartements_1');
+        map.getPane('pane_VariationdelaDGFdanslesdpartements_1').style.zIndex = 401;
+        map.getPane('pane_VariationdelaDGFdanslesdpartements_1').style['mix-blend-mode'] = 'normal';
+        var layer_VariationdelaDGFdanslesdpartements_1 = new L.geoJson(json_VariationdelaDGFdanslesdpartements_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_VariationdelaDGFdanslesdpartements_1',
+            onEachFeature: pop_VariationdelaDGFdanslesdpartements_1,
+            style: style_VariationdelaDGFdanslesdpartements_1_0,
+        });
+        bounds_group.addLayer(layer_VariationdelaDGFdanslesdpartements_1);
+        map.addLayer(layer_VariationdelaDGFdanslesdpartements_1);
+        var title = new L.Control();
+        title.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        title.update = function () {
+            this._div.innerHTML = '<h2>Variation de la Dotation Globale de Fonctionnement, entre 2019 et 2020</h2>';
+        };
+        title.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Variation de la DGF dans les départements<br /><table><tr><td style="text-align: center;"><img src="legend/VariationdelaDGFdanslesdpartements_1_Infrieure050.png" /></td><td>Inférieure à -0,5%</td></tr><tr><td style="text-align: center;"><img src="legend/VariationdelaDGFdanslesdpartements_1_05051.png" /></td><td>-0,5% à +0,5%</td></tr><tr><td style="text-align: center;"><img src="legend/VariationdelaDGFdanslesdpartements_1_Suprieure052.png" /></td><td>Supérieure à +0,5%</td></tr></table>': layer_VariationdelaDGFdanslesdpartements_1,'Variation de la DGF dans les EPCI<br /><table><tr><td style="text-align: center;"><img src="legend/VariationdelaDGFdanslesEPCI_0_Infrieure20.png" /></td><td>Inférieure à -2%</td></tr><tr><td style="text-align: center;"><img src="legend/VariationdelaDGFdanslesEPCI_0_221.png" /></td><td>-2% à +2%</td></tr><tr><td style="text-align: center;"><img src="legend/VariationdelaDGFdanslesEPCI_0_Suprieure22.png" /></td><td>Supérieure à +2%</td></tr></table>': layer_VariationdelaDGFdanslesEPCI_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
